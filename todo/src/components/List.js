@@ -1,10 +1,15 @@
 import React from 'react';
 
 
-function List () {
+function List (props) {
     return(
-
-     <p>hello</p>
+<>
+    <div>
+        {props.state.todos.map((todo) => {
+         {todo.item} 
+        })}
+    </div>
+    </>
     )
 }
 

@@ -26,10 +26,13 @@ function App() {
     payload: id})
   }
 
+  const clear = () => {
+    dispatch({type: 'CLEAR'})
+  }
 
   return (
     <div className="App">
-     <List />
+     <List completed={toggleCompleted} dispatch={dispatch} state={state}/>
      <Form />
     </div>
   );
