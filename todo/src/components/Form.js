@@ -1,17 +1,15 @@
-import React from 'react';
+import React from "react";
 
-
-function Form () {
+const ToDoForm = (props) => {
     return(
-
-     <div>
-         <form>
-             <input></input>
-             <button>Add Item</button>
-         </form>
-         <button>Clear</button>
-     </div>
+        <div className="todoForm">
+            <form onSubmit={props.handleSubmit} className="form">
+                <input type="text" value={props.newToDo} name="newToDo" onChange={props.handleChange} className="input" />
+                <button className="add-btn">Add Item</button>
+            </form>
+            <button className="clear-btn" onClick={props.clearCompleted}>Clear Completed</button>
+        </div>
     )
 }
 
-export default Form;
+export default ToDoForm;

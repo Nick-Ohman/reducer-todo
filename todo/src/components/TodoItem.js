@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const TodoItem = () => {
+const ToDo = (props) => {
     return(
-        <div classname ='todoItem'>
-            <p>Item</p>
-
+        <div className="toDoItem">
+            <input type="checkbox" onClick={()=>props.completed(props.todo.id)} />
+            {props.todo.item}
         </div>
     )
-
 }
+
+export default ToDo;

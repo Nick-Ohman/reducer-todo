@@ -1,39 +1,38 @@
 import React, {useState, useReducer} from 'react';
-import {reducer, initialState} from './reducers/reducer'
-import List from './components/List'
-import Form from './components/Form'
-
-
+import './App.css';
+import Title from "./components/title"
+import TodoList from "./components/List";
+import ToDoForm from "./components/Form";
+import {reducer, initialState} from "./reducers/reducer"
 
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state)
-  const [todo, setTodo] = useState('')
+const [state, dispatch] = useReducer(reducer, initialState);
+console.log(state);
+const [newToDo, setNewToDo] = useState("")
 
-  const handleChange = (e) => {
-    setTodo(e.target.value)
-  }
+const handleChange = (e) => {
+  setNewToDo(e.target.value)
+}
+const handleSubmit=(e)=>{
+  e.preventDefault();
+  setNewToDo("");
+  dispatch({type: "NEW_TODO", payload: newToDo})
+}
 
-  const handleSubit = (e) => {
-    e.preventDefault();
-    setTodo('');
-    dispatch({type: 'NEW_TODO', payload: todo})
-  }
+const Completed = (id) => {
+  dispatch({type: "TOGGLE_COMPLETED", payload: id})
+}
 
-  const toggleCompleted = (id) => {
-    dispatch({type: 'TOGGLE_COMPLETED',
-    payload: id})
-  }
-
-  const clear = () => {
-    dispatch({type: 'CLEAR'})
-  }
+const clearCompleted = () => {
+  dispatch({type:"CLEAR_COMPLETED"})
+}
 
   return (
     <div className="App">
-     <List completed={toggleCompleted} dispatch={dispatch} state={state}/>
-     <Form />
+      <Title />
+      <TodoList state={state} dispatch={dispatch} completed={Completed} />
+      <ToDoForm newToDo={newToDo} handleChange={handleChange} handleSubmit={handleSubmit} clearCompleted={clearCompleted} />
     </div>
   );
 }
